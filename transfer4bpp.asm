@@ -227,10 +227,10 @@ LoadAuxAnimated:
 	JSR Do4BPPtoAnimated_direct_variable
 
 	SEP #$30
-	LDY #$05 : JSR SetSheetLoc_spr
+	LDY #$05 : JSR SetSheetLoc_bg
 	REP #$31
 	LDA $00 : ADC #$0600 ; star tile buffer offset
-	LDY #$0020 : LDX #$2540
+	LDY #$0002 : LDX #$2DC0
 	JSR Do4BPPtoAnimated_direct_variable
 
 	SEP #$30
@@ -1129,6 +1129,7 @@ SetSheetLoc:
 		SEP #$30
 		RTS
 
+warnpc $00E852
 ;------------------------------------------------------------------------
 ; Fix animated buffer updates bank
 ;------------------------------------------------------------------------
@@ -1137,4 +1138,3 @@ org $00FDD9 : db $7F ; pegs
 org $029782 : db $7F ; star tiles
 org $029794 : db $7F ; star tiles
 
-warnpc $00E852
