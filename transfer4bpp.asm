@@ -281,7 +281,7 @@ warnpc $00D469
 ; Rewrite to read directly from ROM
 ;------------------------------------------------------------------------
 org $00D4DB
-GetAnimatedSpriteTile: ; rewritten to read directly from ROM
+GetAnimatedSpriteTile:
 --	PHB : PHK : PLB
 	PHA
 	STZ $00
@@ -807,7 +807,7 @@ org $00E284
 
 warnpc $00E2D0
 ;------------------------------------------------------------------------
-; Rewritten to read directly from ROM
+; Rewrite to read directly from ROM
 ;------------------------------------------------------------------------
 org $00E2D0
 	PHB : PHK : PLB

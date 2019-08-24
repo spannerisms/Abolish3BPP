@@ -8,6 +8,7 @@ This repository is designed to make graphics edits for Zelda 3 easier by convert
 * Banks $11–$18 now contain usable space for anything.
 * By default, addresses $19EA–$19EF are reserved to cache addresses for DMA. Addresses $76–$78 are reserved for caching pixel data (see palettes note below). These locations may be redefined.
 * `gfx_sheets.asm` includes comments on which sheet contains what for sprites.
+* `$7F9000` is the new location of the animated tile buffer (0x2E00 bytes). This is necessary as the decompressed data buffer at `$7E6000` now leaks into the vanilla animated tile buffer.
 
 ## Resources included
 * `/vanilla` contains every graphics sheet converted to 4BPP (`.4bpp`) (except those that are 2BPP (`.2bpp`)), these binaries may be modified by any means to change the graphics loaded.
