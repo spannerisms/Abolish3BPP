@@ -1,7 +1,3 @@
-; TODO : remove quake blobs for crystal switch (they use right side palette)
-; find something else to permanently replace quake blobs
-; bubble and bubble splash only used for king zora, can be replaced
-
 check bankcross off
 !SHEET = $00
 
