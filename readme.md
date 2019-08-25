@@ -1,12 +1,22 @@
 # Abolish 3BPP
 This repository is designed to make graphics edits for Zelda 3 easier by converting all graphics data to the 4 bits per pixel format (4BPP). It contains patches that remove both the compressed and uncompressed 3BPP graphics and updates vanilla routines to read directly from ROM whenever possible. This will thus provide visible reduction in loading times for large graphic changes.
 
+## How to use
+### Patching
+* Experienced ASM users simply need to Add `incsrc "4bppatches.asm"` to your main asm file somewhere.
+* Less experienced users may drag their ROM file to the `quicky.bat` file, which will automatically patch it and create a new copy at `name-nocomp.sfc`.
+
+### Including graphics
+* To include custom graphics, I recommend creating a new folder called `custom` and putting your files in there. I also recommend creating a copy of this folder for each hack.
+* To change the graphic used by the patch, open `gfx_sheets.asm` in a text editor and find the line that reads `%add_sheet("sheet_##", "vanilla/GFX##.4bpp")`, where `##` is the hexadecimal ID of the sheet you wish to replace. Once you find it, change the 2nd set of quotes to relative file path of your new graphics. For example, if you modified sheet C2 and put the graphics in a folder named `kaizo`, you would find its line and change it to `%add_sheet("sheet_C2", "kaizo/GFXC2.4bpp")`.
+  * As a small note, sheets CD, CE, CF, and D0 are included in the file twice. Once in the standard location, and again at the bottom.
+
 ## ASM notes
 * This code is designed to work with Asar.
-* Add `incsrc "4bppatches.asm"` to your main asm file somewhere. By default, this will add some code to bank $11, which normally contains graphics data.
-* By default, banks $B0–$C0 are reserved for graphics. Ideally, these should be placed in consecutive banks, but you can manually change their location to anything
+* Banks $B0–$C0 are reserved for graphics. Ideally, these should be placed in consecutive banks, but you can manually change their location to anything.
+* Some code will be added to bank $11, which normally contains graphics data.
 * Banks $11–$18 now contain usable space for anything.
-* By default, addresses $19EA–$19EF are reserved to cache addresses for DMA. Addresses $76–$78 are reserved for caching pixel data (see palettes note below). These locations may be redefined.
+* Addresses $19EA–$19EF are reserved to cache addresses for DMA. Addresses $76–$78 are reserved for caching pixel data (see palettes note below). These locations may be redefined.
 * `gfx_sheets.asm` includes comments on which sheet contains what for sprites.
 * `$7F9000` is the new location of the animated tile buffer (0x2E00 bytes). This is necessary as the decompressed data buffer at `$7E6000` now leaks into the vanilla animated tile buffer.
 
